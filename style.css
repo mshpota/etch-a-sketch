@@ -1,0 +1,49 @@
+body {
+    font-family: Consolas, Monaco, monospace;
+    background-color: rgb(216, 216, 216);
+}
+
+.name {
+    background-color: rgb(231, 233, 239);
+    margin: 0 auto;
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    border-radius: 1rem;
+    border: 1mm ridge rgb(173, 173, 173);
+}
+
+.name > p {
+    font-size: 2rem;
+    flex: 0 0 20vw;
+    text-align: center;
+}
+
+.game-content {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.controls {
+    background-color: rgb(231, 233, 239);
+    flex: 0 0 200px;
+    height: 500px;
+    border-radius: 1rem;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    border: 1mm ridge rgb(173, 173, 173);
+}
+
+.sketch-pad {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 500px;
+    background-color: rgb(231, 233, 239);
+    border-radius: 1rem;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    border: 1mm ridge rgb(173, 173, 173);
+}
+
+

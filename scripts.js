@@ -25,23 +25,18 @@ function makeGrid(gridSize) {
 let gridSize = 16;
 makeGrid(gridSize);
 
-// let mouseDown = false;
-// sketchPad.addEventListener('mousedown', () => {
-//     mouseDown = true;
-//     console.log(mouseDown);
-// });
-// sketchPad.addEventListener('mouseup', () => {
-//     mouseDown = false;
-//     console.log(mouseDown);
-// });
+let mouseDown = false;
 
 // To draw on the sketch-pad
 const pixelList = sketchPad.querySelectorAll('.pixel');
-pixelList.forEach(pixel => pixel.addEventListener('mouseover', (e) => {
-    if (mouseDown)
+pixelList.forEach(pixel => pixel.addEventListener('mousedown', (e) => {
+        mouseDown = true;
         e.target.style.backgroundColor = '#000000e6'; // can possibly play later with opacity using rgba
 }));
 
-pixelList.forEach(pixel => pixel.addEventListener('click', (e) => {
-        e.target.style.backgroundColor = '#000000e6'; // can possibly play later with opacity using rgba
+pixelList.forEach(pixel => pixel.addEventListener('mouseup', () => mouseDown = false));
+
+pixelList.forEach(pixel => pixel.addEventListener('mouseover', (e) => {
+    if (mouseDown)
+        e.target.style.backgroundColor = '#000000e6';
 }));

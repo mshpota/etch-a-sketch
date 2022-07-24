@@ -5,8 +5,7 @@ function makeGrid(gridSize) {
 
     for (let i = 0; i < gridSize * gridSize; i++) {
         const pixelDiv = document.createElement('div');
-        pixelDiv.style.minHeight = `${pixelDivSize}px`;
-        pixelDiv.style.minWidth = `${pixelDivSize}px`;
+        pixelDiv.style.flex = `0 0 ${pixelDivSize}px`;
         pixelDiv.style.border = '0.5px solid #00000012';
         pixelDiv.classList.add('pixel');
 
@@ -26,11 +25,23 @@ function makeGrid(gridSize) {
 let gridSize = 16;
 makeGrid(gridSize);
 
+// let mouseDown = false;
+// sketchPad.addEventListener('mousedown', () => {
+//     mouseDown = true;
+//     console.log(mouseDown);
+// });
+// sketchPad.addEventListener('mouseup', () => {
+//     mouseDown = false;
+//     console.log(mouseDown);
+// });
+
 // To draw on the sketch-pad
 const pixelList = sketchPad.querySelectorAll('.pixel');
-pixelList.forEach(pixel => pixel.addEventListener('mouseenter', (e) => {
-    e.target.style.backgroundColor = '#000000e6'; // can possibly play later with opacity using rgba
+pixelList.forEach(pixel => pixel.addEventListener('mouseover', (e) => {
+    if (mouseDown)
+        e.target.style.backgroundColor = '#000000e6'; // can possibly play later with opacity using rgba
 }));
 
-
-
+pixelList.forEach(pixel => pixel.addEventListener('click', (e) => {
+        e.target.style.backgroundColor = '#000000e6'; // can possibly play later with opacity using rgba
+}));

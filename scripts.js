@@ -1,7 +1,10 @@
 const sketchPad = document.querySelector('.game-content .sketch-pad');
+let gridSize = 16;
+let pixelList;
+let mouseDown = false;
 
 function makeGrid(gridSize) {
-    const pixelDivSize = sketchPad.clientHeight / 16 - 1; // -1 to account for 0.5px border
+    const pixelDivSize = sketchPad.clientHeight / gridSize - 1; // -1 to account for 0.5px border
 
     for (let i = 0; i < gridSize * gridSize; i++) {
         const pixelDiv = document.createElement('div');
@@ -17,26 +20,40 @@ function makeGrid(gridSize) {
             pixelDiv.style.borderBottomLeftRadius = '0.8rem';
         else if (i === gridSize * gridSize - 1)
             pixelDiv.style.borderBottomRightRadius = '0.8rem';
+
+        pixelDiv.addEventListener('mousedown', (e) => {
+            mouseDown = true;
+            e.target.style.backgroundColor = '#000000e6'; // can possibly play later with opacity using rgba
+        });
+        
+        pixelDiv.addEventListener('mouseup', () => mouseDown = false);
+        
+        pixelDiv.addEventListener('mouseover', (e) => {
+            if (mouseDown)
+                e.target.style.backgroundColor = '#000000e6';
+        });
             
         sketchPad.appendChild(pixelDiv);
     }
+    pixelList = sketchPad.querySelectorAll('.pixel');
 }
 
-let gridSize = 16;
+function deleteGrid() {
+    pixelList.forEach(pixel => pixel.parentNode.removeChild(pixel));
+}
+
+function clearGrid() {
+    pixelList.forEach(pixel => pixel.style.backgroundColor = '#e7e9ef');
+}
+
 makeGrid(gridSize);
 
-let mouseDown = false;
+const clearButton = document.querySelector('.game-content .controls .clear-button');
+clearButton.addEventListener('click', clearGrid);
 
-// To draw on the sketch-pad
-const pixelList = sketchPad.querySelectorAll('.pixel');
-pixelList.forEach(pixel => pixel.addEventListener('mousedown', (e) => {
-        mouseDown = true;
-        e.target.style.backgroundColor = '#000000e6'; // can possibly play later with opacity using rgba
-}));
-
-pixelList.forEach(pixel => pixel.addEventListener('mouseup', () => mouseDown = false));
-
-pixelList.forEach(pixel => pixel.addEventListener('mouseover', (e) => {
-    if (mouseDown)
-        e.target.style.backgroundColor = '#000000e6';
-}));
+const gridSizeSlider = document.querySelector('#grid-size');
+gridSizeSlider.addEventListener('change', (e) => {
+    document.querySelector('#rangeValue').innerText = e.originalTarget.value;
+    deleteGrid();
+    makeGrid(parseInt(e.originalTarget.value));
+});

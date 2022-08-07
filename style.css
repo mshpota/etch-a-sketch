@@ -26,13 +26,25 @@ body {
 }
 
 .controls {
+    align-self: center;
+    flex-direction: column;
     background-color: #e7e9ef;
     flex: 0 0 200px;
-    height: 500px;
+    height: 256px;
     border-radius: 1rem;
     margin-top: 10vh;
     margin-bottom: 10vh;
     border: 1mm ridge #adadad;
+    padding: 1rem;
+}
+
+.clear-button {
+    margin-top: 30px;
+    width: 124px;
+    height: 40px;
+    border-radius: 0.5rem;
+    border: 0.3mm solid #8d8d92;
+    font-size: 1rem;
 }
 
 .slider p {
@@ -49,12 +61,17 @@ body {
 .sketch-pad {
     display: flex;
     flex-wrap: wrap;
-    flex: 0 0 500px;
+    flex: 0 0 512px;
+    height: 512px;
     background-color: #e7e9ef;
     border-radius: 1rem;
     margin-top: 10vh;
     margin-bottom: 10vh;
     border: 1mm ridge #adadad;
+    padding: 0.5rem;
+    background-clip: padding-box;
+
+    background-color: #3b3a3a;
 }
 
 

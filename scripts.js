@@ -2,7 +2,6 @@
 const title = document.querySelector('.name');
 title.addEventListener('click', () => window.location.reload());
 
-const sketchPad = document.querySelector('.game-content .sketch-pad');
 let gridSize = 16;
 let pixelList;
 let mouseDown = false;
@@ -18,6 +17,7 @@ randomColorsLI.addEventListener('change', (e) => {
     }
 });
 
+const sketchPad = document.querySelector('.game-content .sketch-pad');
 
 function makeGrid(gridSize) {
     const sketchPadStyles = window.getComputedStyle(sketchPad, null);

@@ -6,16 +6,26 @@ let gridSize = 16;
 let pixelList;
 let mouseDown = false;
 let randomColors = false;
+let shading = false;
 
-// Checkbox for random colors.
-const randomColorsLI = document.querySelector('input[name=random-colors]');
-randomColorsLI.addEventListener('change', (e) => {
-    if (e.target.checked) {
+const radios = document.querySelectorAll('input[name=options]');
+
+// Different styles of drawing
+for (const radio of radios) {
+  radio.onclick = (e) => {
+    if (e.target.value === 'random-colors') {
         randomColors = true;
+        shading = false;
+    } else if (e.target.value === 'shading') {
+        randomColors = false;
+        shading = true;
+    // Default setting
     } else {
         randomColors = false;
+        shading = false;
     }
-});
+  }
+}
 
 const sketchPad = document.querySelector('.game-content .sketch-pad');
 
@@ -47,8 +57,9 @@ function makeGrid(gridSize) {
             if (randomColors) {
                 const randomColor = Math.floor(Math.random()*16777215).toString(16);
                 e.target.style.backgroundColor = '#' + randomColor;
-            }
-            else
+            } else if (shading) {
+
+            } else
                 e.target.style.backgroundColor = '#000000e6'; // can possibly play later with opacity using rgba
         });
         
@@ -60,9 +71,10 @@ function makeGrid(gridSize) {
                 if (randomColors) {
                     const randomColor = Math.floor(Math.random()*16777215).toString(16);
                     e.target.style.backgroundColor = '#' + randomColor;
-                } else {
+                } else if (shading) {
+                    
+                } else
                     e.target.style.backgroundColor = '#000000e6';
-                }
             }  
         });
             

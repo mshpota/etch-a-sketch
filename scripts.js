@@ -27,18 +27,11 @@ for (const radio of radios) {
   }
 }
 
-const sketchPad = document.querySelector('.game-content .sketch-pad');
+const sketchPad = document.querySelector('.sketch-pad-work-area');
 
 function makeGrid(gridSize) {
-    const sketchPadStyles = window.getComputedStyle(sketchPad, null);
-   
-    // there is an issue with sizing for curtain values, maybe some truncation happening?
-    const pixelDivSize = sketchPad.clientHeight / gridSize;
-
     for (let i = 0; i < gridSize * gridSize; i++) {
         const pixelDiv = document.createElement('div');
-        pixelDiv.style.flex = `0 0 ${pixelDivSize}px`;
-        pixelDiv.style.height = pixelDivSize;
         pixelDiv.classList.add('pixel');
         pixelDiv.style.backgroundColor = '#e7e9ef';
         
@@ -56,6 +49,11 @@ function makeGrid(gridSize) {
             
         sketchPad.appendChild(pixelDiv);
     }
+
+    // CSS grid styles
+    sketchPad.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+    sketchPad.style.gridTemplateRows = 'auto';
+
     pixelList = sketchPad.querySelectorAll('.pixel');
 }
 

@@ -93,11 +93,10 @@ li > input {
     border-radius: 0.75rem;
 }
 
-.sketch-pad {
+.sketch-pad-work-area {
     display: grid;
-    flex-wrap: wrap;
-    flex: 0 0 488px;
     height: 488px;
+    width: 488px;
 }
 
 

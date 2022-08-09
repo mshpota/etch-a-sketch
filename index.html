@@ -14,7 +14,8 @@
     <div class="game-content">
         <div class="controls">
             <div class="slider">
-                <input type="range" id="grid-size" min="16" max="100" value="16" step="2" oninput="rangeValue.innerText = this.value">
+                <input type="range" id="grid-size" min="16" max="100" value="16" step="2" autocomplete="off"
+                    oninput="rangeValue.innerText = this.value">
                 <label for="grid-size">Grid Size:</label>
                 <p id="rangeValue">16</p>
             </div>
@@ -29,13 +30,17 @@
                     <label for="shading">Shading</label>
                 </li>
                 <li>
-                    <input type="radio" name="options" value="default" checked>
+                    <input type="radio" name="options" value="default" checked autocomplete="off">
                     <label for="default">Default</label>
                 </li>
             </ul>
             <button class="clear-button" type="button">Clear</button>
         </div>
-        <div class="sketch-pad"></div>
+        <div class="sketch-pad-contour">
+            <div class="sketch-pad-shell">
+                <div class="sketch-pad"></div>
+            </div>
+        </div>
     </div>
     <script src="scripts.js"></script>
 </body>

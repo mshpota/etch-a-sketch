@@ -38,17 +38,35 @@ body {
     padding: 1rem;
 }
 
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul > label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+li > input {
+    margin-left: 0;
+}
+
 .clear-button {
     margin-top: 30px;
     width: 124px;
     height: 40px;
     border-radius: 0.5rem;
     border: 0.3mm solid #8d8d92;
-    font-size: 1rem;
+    font-size: 1rem;;
 }
 
 .slider p {
-    display: inline;
+    display: inline;list-style-type: none;
     font-size: 1rem;
     font-weight: 400;
     padding-left:30px;
@@ -58,20 +76,28 @@ body {
     margin-left: 0.1rem;
 }
 
-.sketch-pad {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 0 0 512px;
+.sketch-pad-contour {
+    width: 512px;
     height: 512px;
-    background-color: #e7e9ef;
-    border-radius: 1rem;
     margin-top: 10vh;
     margin-bottom: 10vh;
-    border: 1mm ridge #adadad;
-    padding: 0.5rem;
-    background-clip: padding-box;
+    border: 4px ridge #adadad;
+    border-radius: 1rem;
+    background-color: #e7e9ef;
+}
 
-    background-color: #3b3a3a;
+.sketch-pad-shell {
+    width: 488px;
+    height: 488px;
+    border: 12px solid #525255;
+    border-radius: 0.75rem;
+}
+
+.sketch-pad {
+    display: grid;
+    flex-wrap: wrap;
+    flex: 0 0 488px;
+    height: 488px;
 }
 
 

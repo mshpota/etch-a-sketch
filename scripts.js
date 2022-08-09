@@ -33,24 +33,13 @@ function makeGrid(gridSize) {
     const sketchPadStyles = window.getComputedStyle(sketchPad, null);
    
     // there is an issue with sizing for curtain values, maybe some truncation happening?
-    const pixelDivSize = (sketchPad.clientHeight - parseInt(sketchPadStyles.getPropertyValue('padding')) * 2) / gridSize;
+    const pixelDivSize = sketchPad.clientHeight / gridSize;
 
     for (let i = 0; i < gridSize * gridSize; i++) {
         const pixelDiv = document.createElement('div');
         pixelDiv.style.flex = `0 0 ${pixelDivSize}px`;
-        // pixelDiv.style.border = '0.5px solid #00000012';
+        pixelDiv.style.height = pixelDivSize;
         pixelDiv.classList.add('pixel');
-
-        // Round specific corners for the corner pixels
-        if (i === 0)
-            pixelDiv.style.borderTopLeftRadius = '0.8rem';
-        else if (i === gridSize - 1)
-            pixelDiv.style.borderTopRightRadius = '0.8rem';
-        else if (i === gridSize * gridSize - gridSize)
-            pixelDiv.style.borderBottomLeftRadius = '0.8rem';
-        else if (i === gridSize * gridSize - 1)
-            pixelDiv.style.borderBottomRightRadius = '0.8rem';
-        
         pixelDiv.style.backgroundColor = '#e7e9ef';
         
         // Single pixel coloring
@@ -60,7 +49,6 @@ function makeGrid(gridSize) {
         });
         
         pixelDiv.addEventListener('mouseup', () => mouseDown = false);
-        
         // Continuous coloring stroke
         pixelDiv.addEventListener('mouseover', (e) => {
             drawPixels(e);

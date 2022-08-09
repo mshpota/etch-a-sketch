@@ -1,4 +1,4 @@
-// Reload page when clicking on title of the game.
+// Reload page when clicking on the title of the game
 const title = document.querySelector('.name');
 title.addEventListener('click', () => window.location.reload());
 
@@ -10,7 +10,7 @@ let shading = false;
 
 const radios = document.querySelectorAll('input[name=options]');
 
-// Different styles of drawing
+// Selector block for different coloring styles
 for (const radio of radios) {
   radio.onclick = (e) => {
     if (e.target.value === 'random-colors') {
@@ -33,7 +33,7 @@ function makeGrid(gridSize) {
     const sketchPadStyles = window.getComputedStyle(sketchPad, null);
    
     // there is an issue with sizing for curtain values, maybe some truncation happening?
-    const pixelDivSize = (sketchPad.clientHeight - parseInt(sketchPadStyles.getPropertyValue('padding')) * 2) / gridSize; // -1 to account for 0.5px border
+    const pixelDivSize = (sketchPad.clientHeight - parseInt(sketchPadStyles.getPropertyValue('padding')) * 2) / gridSize;
 
     for (let i = 0; i < gridSize * gridSize; i++) {
         const pixelDiv = document.createElement('div');
@@ -41,6 +41,7 @@ function makeGrid(gridSize) {
         // pixelDiv.style.border = '0.5px solid #00000012';
         pixelDiv.classList.add('pixel');
 
+        // Round specific corners for the corner pixels
         if (i === 0)
             pixelDiv.style.borderTopLeftRadius = '0.8rem';
         else if (i === gridSize - 1)
@@ -52,35 +53,47 @@ function makeGrid(gridSize) {
         
         pixelDiv.style.backgroundColor = '#e7e9ef';
         
+        // Single pixel coloring
         pixelDiv.addEventListener('mousedown', (e) => {
             mouseDown = true;
-            if (randomColors) {
-                const randomColor = Math.floor(Math.random()*16777215).toString(16);
-                e.target.style.backgroundColor = '#' + randomColor;
-            } else if (shading) {
-
-            } else
-                e.target.style.backgroundColor = '#000000e6'; // can possibly play later with opacity using rgba
+            drawPixels(e);
         });
         
         pixelDiv.addEventListener('mouseup', () => mouseDown = false);
         
+        // Continuous coloring stroke
         pixelDiv.addEventListener('mouseover', (e) => {
-            if (mouseDown) {
-
-                if (randomColors) {
-                    const randomColor = Math.floor(Math.random()*16777215).toString(16);
-                    e.target.style.backgroundColor = '#' + randomColor;
-                } else if (shading) {
-                    
-                } else
-                    e.target.style.backgroundColor = '#000000e6';
-            }  
+            drawPixels(e);
         });
             
         sketchPad.appendChild(pixelDiv);
     }
     pixelList = sketchPad.querySelectorAll('.pixel');
+}
+
+function drawPixels(e) {
+    if (mouseDown) {
+        // Random colors coloring style
+        if (randomColors) {
+            const randomColor = Math.floor(Math.random()*16777215).toString(16);
+            if (e.target.style.backgroundColor === 'rgb(231, 233, 239)') {
+                e.target.style.backgroundColor = '#' + randomColor;
+            }
+        // Shading coloring style
+        } else if (shading) {
+            if (e.target.style.backgroundColor === 'rgb(231, 233, 239)') {
+                e.target.style.backgroundColor = `rgba(0, 0, 0, 0.1)`;
+            } else {
+                let currentOpacity = Number(e.target.style.backgroundColor.slice(-4, -1));
+                if (currentOpacity < 0.9) {
+                    e.target.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity + 0.1})`;
+                }
+            }
+        // Default coloring style
+        } else {
+            e.target.style.backgroundColor = '#000000e6';
+        }
+    }  
 }
 
 function deleteGrid() {
@@ -93,8 +106,6 @@ function clearGrid() {
     });
 }
 
-makeGrid(gridSize);
-
 const clearButton = document.querySelector('.game-content .controls .clear-button');
 clearButton.addEventListener('click', clearGrid);
 
@@ -104,3 +115,6 @@ gridSizeSlider.addEventListener('change', (e) => {
     deleteGrid();
     makeGrid(parseInt(e.originalTarget.value));
 });
+
+makeGrid(gridSize);
+

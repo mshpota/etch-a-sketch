@@ -1,3 +1,9 @@
 # ETCH-A-SKETCH
 
-This is an assignment from The Odin Project curriculum. 
+This project is an assignment from The Odin Project curriculum ([https://www.theodinproject.com/](https://www.theodinproject.com/)).
+
+While working on this project,
+
+- I learned about CSS grid
+  
+- Improved Javascript skills

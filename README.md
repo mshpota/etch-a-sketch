@@ -12,4 +12,4 @@ While working on this project,
     - Changing CSS styles 
     - Working with events and event listeners
 
-*Note*: the project works as intended in Firefox v103.0.1 on Fedora Linux. However, when testing it in Chrome v104.0.5112.79, the grid resizing doesn't work. 
+*Note:* the project works as intended in Firefox v103.0.1 and in Chrome v104.0.5112.79 on Fedora Linux. 

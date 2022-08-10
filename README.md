@@ -6,4 +6,4 @@ While working on this project,
 
 - I learned about CSS grid
   
-- Improved Javascript skills
+- Improved Javascript skills: DOM manipulation, changing attributes, working with events and event listeners

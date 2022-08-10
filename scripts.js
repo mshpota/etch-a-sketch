@@ -24,6 +24,7 @@ function makeGrid(gridSize) {
         });
         
         pixelDiv.addEventListener('mouseup', () => mouseDown = false);
+
         // Continuous coloring stroke
         pixelDiv.addEventListener('mouseover', (e) => {
             drawPixels(e);
@@ -62,20 +63,20 @@ function drawPixels(e) {
     if (mouseDown) {
         // Random colors coloring style
         if (randomColors) {
-            const randomColor = Math.floor(Math.random()*16777215).toString(16);
-            if (e.target.style.backgroundColor === 'rgb(231, 233, 239)') {
-                e.target.style.backgroundColor = '#' + randomColor;
-            }
+            const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+            e.target.style.backgroundColor = '#' + randomColor;
+              
         // Shading coloring style
         } else if (shading) {
-            if (e.target.style.backgroundColor === 'rgb(231, 233, 239)') {
+            let currentOpacity = Number(e.target.style.backgroundColor.slice(-4, -1));
+            if (e.target.style.backgroundColor !== `rgba(0, 0, 0, ${currentOpacity})`) {
                 e.target.style.backgroundColor = `rgba(0, 0, 0, 0.1)`;
             } else {
-                let currentOpacity = Number(e.target.style.backgroundColor.slice(-4, -1));
                 if (currentOpacity < 0.9) {
                     e.target.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity + 0.1})`;
                 }
             }
+            
         // Default coloring style
         } else {
             e.target.style.backgroundColor = '#000000e6';
@@ -89,11 +90,11 @@ function deleteGrid() {
 
 function clearGrid() {
     pixelList.forEach(pixel => {
-        pixel.style.backgroundColor = '#e7e9ef'
+        pixel.style.backgroundColor = '#e7e9ef';
     });
 }
 
-const clearButton = document.querySelector('.game-content .controls .clear-button');
+const clearButton = document.querySelector('.clear-button');
 clearButton.addEventListener('click', clearGrid);
 
 const gridSizeSlider = document.querySelector('#grid-size');

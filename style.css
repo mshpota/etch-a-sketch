@@ -21,6 +21,7 @@ body {
     flex: 0 0 20vw;
     align-self: center;
     text-align: center;
+    white-space: nowrap;
 }
 
 .game-content {

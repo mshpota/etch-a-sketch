@@ -2,32 +2,14 @@
 const title = document.querySelector('.name');
 title.addEventListener('click', () => window.location.reload());
 
+const radioInputs = document.querySelectorAll('input[name=options]');
+const sketchPad = document.querySelector('.sketch-pad-work-area');
+
 let gridSize = 16;
-let pixelList;
 let mouseDown = false;
 let randomColors = false;
 let shading = false;
-
-const radios = document.querySelectorAll('input[name=options]');
-
-// Selector block for different coloring styles
-for (const radio of radios) {
-  radio.onclick = (e) => {
-    if (e.target.value === 'random-colors') {
-        randomColors = true;
-        shading = false;
-    } else if (e.target.value === 'shading') {
-        randomColors = false;
-        shading = true;
-    // Default setting
-    } else {
-        randomColors = false;
-        shading = false;
-    }
-  }
-}
-
-const sketchPad = document.querySelector('.sketch-pad-work-area');
+let pixelList = null;
 
 function makeGrid(gridSize) {
     for (let i = 0; i < gridSize * gridSize; i++) {
@@ -55,6 +37,25 @@ function makeGrid(gridSize) {
     sketchPad.style.gridTemplateRows = 'auto';
 
     pixelList = sketchPad.querySelectorAll('.pixel');
+}
+
+// Controller for different coloring styles
+function colorController(radioInputs) {
+    for (const radio of radioInputs) {
+        radio.onclick = (e) => {
+          if (e.target.value === 'random-colors') {
+              randomColors = true;
+              shading = false;
+          } else if (e.target.value === 'shading') {
+              randomColors = false;
+              shading = true;
+          // Default setting
+          } else {
+              randomColors = false;
+              shading = false;
+          }
+        };
+    }
 }
 
 function drawPixels(e) {
@@ -103,4 +104,4 @@ gridSizeSlider.addEventListener('change', (e) => {
 });
 
 makeGrid(gridSize);
-
+colorController(radioInputs);

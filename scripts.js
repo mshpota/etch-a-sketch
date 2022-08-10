@@ -99,9 +99,10 @@ clearButton.addEventListener('click', clearGrid);
 
 const gridSizeSlider = document.querySelector('#grid-size');
 gridSizeSlider.addEventListener('change', (e) => {
-    document.querySelector('#rangeValue').innerText = e.originalTarget.value;
+    console.log(e);
+    document.querySelector('#rangeValue').innerText = e.target.value;
     deleteGrid();
-    makeGrid(parseInt(e.originalTarget.value));
+    makeGrid(parseInt(e.target.value));
 });
 
 makeGrid(gridSize);
